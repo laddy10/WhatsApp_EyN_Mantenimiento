@@ -1,0 +1,66 @@
+# Generated files
+bin/
+gen/
+out/
+null/
+
+# Gradle files
+.gradle
+build/
+# Compiled class file
+*.class
+
+# Log Files
+*.log
+*.log.1
+*.log.2
+*.log.3
+*.log.4
+*.log.5
+
+# IntelliJ
+*.iml
+*.iws
+.idea/
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Sonarlint plugin
+.idea/sonarlint
+
+# Package Files #
+*.jar
+*.nar
+*.zip
+*.tar.gz
+*.rar
+*.war
+*.ear
+
+# ignore files target
+target/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+
+#Capturas de pantalla
+Capturas/
+
+
+#APK
+*.apk
+
+#REPORTES
+reportes/
