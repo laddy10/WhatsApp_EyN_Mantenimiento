@@ -21,7 +21,7 @@ public class LineaMiNegocioOtros2 implements Task {
     private static final String paso2 = "Validar pregunta en cual servicio necesitas ayuda";
     private static final String paso3 = "Seleccionar Otros";
     private static final String paso4 = "Validar menu de opciones disponibles";
-    private static final String paso5 = "Seleccionar opcion 1";
+    private static final String paso5 = "Seleccionar opcion 2";
 
     @Override
     public <T extends Actor> void performAs(T actor) {

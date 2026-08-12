@@ -40,9 +40,10 @@ public class ValidarTextoErrorYLimpiarChat implements Task {
           Click.on(BTN_MAS_OPCIONES),
           ClickTextoQueContengaX.elTextoContiene(MAS),
           ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT),
-          Click.on(BTN_VACIAR_CHAT),
-          Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
-          Click.on(BTN_ENVIAR));
+          Click.on(BTN_VACIAR_CHAT)
+         // Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
+         // Click.on(BTN_ENVIAR)
+      );
     }
   }
 

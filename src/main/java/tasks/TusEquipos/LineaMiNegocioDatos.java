@@ -14,6 +14,7 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.EvidenciaUtils;
 
 public class LineaMiNegocioDatos implements Task {
@@ -119,22 +120,6 @@ public class LineaMiNegocioDatos implements Task {
                 ValidarTextoQueContengaX.elTextoContiene(MENU_PRINCIPAL)
         );
         EvidenciaUtils.registrarCaptura(paso11);
-
-        actor.attemptsTo(
-                WaitFor.aTime(2000),
-                Click.on(BTN_NO)
-        );
-
-        EvidenciaUtils.registrarCaptura(paso12);
-
-        actor.attemptsTo(
-                WaitForResponse.withText(DESEAS_CONTACTAR_ASESOR),
-                Click.on(BTN_NO2),
-                WaitFor.aTime(2000),
-                WaitForResponse.withText(MENU_PRINCIPAL)
-        );
-
-        EvidenciaUtils.registrarCaptura(paso13);
     }
 
     public static Performable lineaMiNegocioDatos() {

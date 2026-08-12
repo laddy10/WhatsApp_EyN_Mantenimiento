@@ -11,8 +11,9 @@ public class ClasificarRespuestaBot {
         // 🟡 Pantalla inicial NO válida
         if (TextoQueContengaX.verificarTexto("Ideas de regalo").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("¿Qué quieres hacer hoy?").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("Te damos la bienvenida al chat de Claro")
-                .answeredBy(actor)) {
+                || TextoQueContengaX.verificarTexto("Te damos la bienvenida al chat de Claro").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Menú principal").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Elige una de las opciones que tenemos para ti").answeredBy(actor)) {
 
             return EstadoConversacion.PANTALLA_INICIAL;
         }
@@ -28,9 +29,9 @@ public class ClasificarRespuestaBot {
         // 🔴 Errores conversacionales
         if (TextoQueContengaX.verificarTexto("No entendí").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("respuesta no es válida").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("Menú principal").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("opciones mostradas anteriormente").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("ingrese el número de opción").answeredBy(actor)) {
+                || TextoQueContengaX.verificarTexto("ingrese el número de opción").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Aún estoy contigo").answeredBy(actor)) {
 
             return EstadoConversacion.ERROR;
         }

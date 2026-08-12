@@ -2,6 +2,7 @@ package tasks.TusEquipos;
 
 import interactions.Click.ClickElementByText;
 import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.scroll.ScrollInicio;
 import interactions.scroll.ScrollPersonalizado;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForElement;
@@ -82,8 +83,9 @@ public class EstadoServiciosDatos implements Task {
         actor.attemptsTo(
                 WaitForTextContains.withTextContains(TE_RECOMENDAMOS_SOPORTE, 30)
         );
-        actor.attemptsTo(ScrollPersonalizado.scroll(872, 522, 872, 1825));
+       // actor.attemptsTo(ScrollPersonalizado.scroll(872, 522, 872, 1825));
         actor.attemptsTo(
+                ScrollInicio.scrollUnaVista(),
                 ValidarTextoQueContengaX.elTextoContiene(TE_RECOMENDAMOS_SOPORTE)
         );
         EvidenciaUtils.registrarCaptura(paso7);

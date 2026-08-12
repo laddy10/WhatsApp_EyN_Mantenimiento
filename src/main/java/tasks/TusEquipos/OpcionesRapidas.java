@@ -6,6 +6,7 @@ import static utils.Constantes.*;
 import interactions.Click.ClickElementByText;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -23,6 +24,7 @@ public class OpcionesRapidas implements Task {
 
 
         actor.attemptsTo(
+                WaitForTextContains.withAnyTextContains(OPCIONES_RAPIDAS),
                 ValidarTextoQueContengaX.elTextoContiene(OPCIONES_RAPIDAS)
         );
         EvidenciaUtils.registrarCaptura(paso1);

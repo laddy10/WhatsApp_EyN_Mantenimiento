@@ -32,9 +32,9 @@ public class SalirYReiniciarChat implements Task {
                 ClickTextoQueContengaX.elTextoContiene(MAS),
                 ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT),
                 Click.on(BTN_VACIAR_CHAT),
-                WaitFor.aTime(1500),
-                Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
-                Click.on(BTN_ENVIAR),
+               // WaitFor.aTime(1500),
+               // Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
+               // Click.on(BTN_ENVIAR),
                 WaitFor.aTime(2500));
     }
 
