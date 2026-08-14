@@ -66,7 +66,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Y escoger consulta tu consumo
     Y Vaciar chat
 
-  #@WH_EyN_Opciones_Rapidas_Valida_Factura_Consulta_Consumos_Descarga_Factura
+  @WH_EyN_Opciones_Rapidas_Valida_Factura_Consulta_Consumos_Descarga_Factura
   Escenario: Opciones rapidas-Detalle de tu plan/ Consulta consumo
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App

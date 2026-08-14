@@ -6,6 +6,7 @@ import static utils.Constantes.*;
 
 import interactions.Click.ClickElementByText;
 import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.scroll.ScrollInicio;
 import interactions.scroll.ScrollPersonalizado;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
@@ -69,8 +70,11 @@ public class LineaMiNegocioDatos implements Task {
         );
         EvidenciaUtils.registrarCaptura(paso5);
 
-        actor.attemptsTo(WaitFor.aTime(15000));
-        actor.attemptsTo(ScrollPersonalizado.scroll(872, 522, 872, 1825));
+        actor.attemptsTo(
+                WaitFor.aTime(15000),
+                ScrollInicio.scrollUnaVista()
+        );
+        //actor.attemptsTo(ScrollPersonalizado.scroll(872, 522, 872, 1825));
 
         actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(
