@@ -31,7 +31,8 @@ public class ClasificarRespuestaBot {
                 || TextoQueContengaX.verificarTexto("respuesta no es válida").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("opciones mostradas anteriormente").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("ingrese el número de opción").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("Aún estoy contigo").answeredBy(actor)) {
+                || TextoQueContengaX.verificarTexto("Aún estoy contigo").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("No logré entender").answeredBy(actor)) {
 
             return EstadoConversacion.ERROR;
         }
