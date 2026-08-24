@@ -68,7 +68,7 @@ public class LineaMiNegocioLlamadas implements Task {
         );
         EvidenciaUtils.registrarCaptura(paso5);
 
-        actor.attemptsTo(WaitFor.aTime(15000));
+        actor.attemptsTo(WaitFor.aTime(20000));
         actor.attemptsTo(ScrollPersonalizado.scroll(872, 522, 872, 1825));
 
         actor.attemptsTo(
@@ -88,7 +88,8 @@ public class LineaMiNegocioLlamadas implements Task {
                 Click.on(BOTON_ATRAS)
         );
 
-        actor.attemptsTo(WaitFor.aTime(2000));
+        actor.attemptsTo(
+                WaitFor.aTime(2000));
         actor.attemptsTo(ScrollPersonalizado.scroll(850, 1932, 850, 465));
         actor.attemptsTo(
                 WaitFor.aTime(2000),

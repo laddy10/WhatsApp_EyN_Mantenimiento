@@ -71,7 +71,7 @@ public class LineaMiNegocioDatos implements Task {
         EvidenciaUtils.registrarCaptura(paso5);
 
         actor.attemptsTo(
-                WaitFor.aTime(15000),
+                WaitFor.aTime(20000),
                 ScrollInicio.scrollUnaVista()
         );
         //actor.attemptsTo(ScrollPersonalizado.scroll(872, 522, 872, 1825));

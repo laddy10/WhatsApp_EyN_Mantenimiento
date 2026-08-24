@@ -41,10 +41,12 @@ public class OpcionesRapidas implements Task {
         );
         EvidenciaUtils.registrarCaptura(paso3);
 
-        actor.attemptsTo(WaitForResponse.withText(SOPORTE_TECNICO));
+        actor.attemptsTo(
+                WaitForTextContains.withAnyTextContains(LINEA_MI_NEGOCIO)
+        );
         EvidenciaUtils.registrarCaptura(paso4);
 
-        
+
     }
 
     public static Performable opcionesRapidas() {
