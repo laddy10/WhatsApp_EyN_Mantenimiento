@@ -57,6 +57,8 @@ public class IniciarChatClaro implements Task {
                     "opción que ingresaste no es válida",
                     "te mostré arriba",
                     "Lo siento",
+                    "Te recomendamos seguir este soporte",
+                    "Se resolvió la falla",
                     "Aún estoy contigo"
             ).answeredBy(actor);
 

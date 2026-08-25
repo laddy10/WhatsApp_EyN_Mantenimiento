@@ -31,6 +31,8 @@ public class ValidarTextoErrorYLimpiarChat implements Task {
             "Lo siento",
             "opción que ingresaste no es válida",
             "te mostré arriba",
+            "Te recomendamos seguir este soporte",
+            "Se resolvió la falla",
             "Menú principal",
             "Para continuar debes seleccionar alguna de las opciones mostradas anteriormente",
             "Lo siento, tu respuesta no es válida");

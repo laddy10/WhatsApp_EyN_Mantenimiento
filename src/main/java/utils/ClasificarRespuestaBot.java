@@ -35,7 +35,9 @@ public class ClasificarRespuestaBot {
                 || TextoQueContengaX.verificarTexto("Lo siento").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("No logré entender").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("opción que ingresaste no es válida").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("te mostré arriba").answeredBy(actor)) {
+                || TextoQueContengaX.verificarTexto("te mostré arriba").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Te recomendamos seguir este soporte").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Se resolvió la falla").answeredBy(actor)) {
 
             return EstadoConversacion.ERROR;
         }

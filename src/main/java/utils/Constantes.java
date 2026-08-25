@@ -5,7 +5,7 @@ import tasks.TusEquipos.CompraWhatsApp;
 public class Constantes {
 
     public static final String PREGUNTAR_META = "Preguntar a Meta AI o buscar";
-    public static final String AJUSTES = "Ajustes X";
+    public static final String AJUSTES = "Ajustes";
     public static final String AYUDA = "Ayuda";
     public static final String INFO_APP = "Info. de la aplicación";
     public static final String WHATSAPP = "WhatsApp";
