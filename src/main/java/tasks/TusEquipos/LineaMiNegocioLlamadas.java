@@ -79,7 +79,7 @@ public class LineaMiNegocioLlamadas implements Task {
 
         actor.attemptsTo(
                 WaitFor.aTime(2000),
-                Click.on(IMG_CONFIGUR_PUNTO_ACCESO)
+                interactions.ClicEnPuntoAccesoSeguro.ejecutar()
         );
         EvidenciaUtils.registrarCaptura(paso7);
 
@@ -88,12 +88,10 @@ public class LineaMiNegocioLlamadas implements Task {
                 Click.on(BOTON_ATRAS)
         );
 
-        actor.attemptsTo(
-                WaitFor.aTime(2000));
         actor.attemptsTo(ScrollPersonalizado.scroll(850, 1932, 850, 465));
         actor.attemptsTo(
                 WaitFor.aTime(2000),
-                Click.on(IMG_CONFIGURA_MODO_RED)
+                interactions.ClicEnModoRedSeguro.ejecutar()
         );
 
         EvidenciaUtils.registrarCaptura(paso8);

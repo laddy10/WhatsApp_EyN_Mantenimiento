@@ -287,12 +287,16 @@ public class WhatsAppPage extends PageObject {
           Target.the("Imagenconfigura tu punto de acceso")
                   .located(By.xpath("(//android.widget.Button[@content-desc=\"Agrandar foto\"])[1]"));
 
+  public static final Target IMG_AGRANDAR_FOTO =
+          Target.the("Cualquier imagen con boton agrandar foto")
+                  .located(By.xpath("//android.widget.Button[@content-desc=\"Agrandar foto\"]"));
+
   public static final Target BOTON_ATRAS =
           Target.the("Boton atras")
                   .located(By.xpath("//android.widget.ImageButton[@content-desc=\"Atrás\"]"));
 
-  public static final Target IMG_CONFIGURA_MODO_RED =
-          Target.the("Imagen Configura tu modo de red")
+  public static final Target IMG_CONFIGURA_MODO_RED_2 =
+          Target.the("Imagen Configura tu modo de red (Indice 2)")
                   .located(By.xpath("(//android.widget.Button[@content-desc=\"Agrandar foto\"])[2]"));
 
   public static final Target BTN_SI_AUTORIZO =
