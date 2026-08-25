@@ -121,21 +121,6 @@ public class LineaMiNegocioLlamadas implements Task {
         );
         EvidenciaUtils.registrarCaptura(paso11);
 
-        actor.attemptsTo(
-                WaitFor.aTime(2000),
-                Click.on(BTN_NO)
-        );
-
-        EvidenciaUtils.registrarCaptura(paso12);
-
-        actor.attemptsTo(
-                WaitForResponse.withText(DESEAS_CONTACTAR_ASESOR),
-                Click.on(BTN_NO2),
-                WaitFor.aTime(2000),
-                WaitForResponse.withText(MENU_PRINCIPAL)
-        );
-
-        EvidenciaUtils.registrarCaptura(paso13);
     }
 
     public static Performable lineaMiNegocioLlamadas() {

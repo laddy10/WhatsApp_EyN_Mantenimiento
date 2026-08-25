@@ -52,6 +52,11 @@ public class IniciarChatClaro implements Task {
                     "¿Autorizas y aceptas?",
                     "Elige una de las opciones que tenemos para ti",
                     "No entendí tu mensaje",
+                    "no entendí tu mensaje",
+                    "elige una de las opciones",
+                    "opción que ingresaste no es válida",
+                    "te mostré arriba",
+                    "Lo siento",
                     "Aún estoy contigo"
             ).answeredBy(actor);
 

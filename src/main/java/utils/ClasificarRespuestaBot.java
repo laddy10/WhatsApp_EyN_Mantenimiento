@@ -32,7 +32,10 @@ public class ClasificarRespuestaBot {
                 || TextoQueContengaX.verificarTexto("opciones mostradas anteriormente").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("ingrese el número de opción").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Aún estoy contigo").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("No logré entender").answeredBy(actor)) {
+                || TextoQueContengaX.verificarTexto("Lo siento").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("No logré entender").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("opción que ingresaste no es válida").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("te mostré arriba").answeredBy(actor)) {
 
             return EstadoConversacion.ERROR;
         }

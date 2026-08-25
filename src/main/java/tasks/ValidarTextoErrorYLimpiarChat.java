@@ -28,6 +28,9 @@ public class ValidarTextoErrorYLimpiarChat implements Task {
             "No entendí tu mensaje.",
             "no entendí tu mensaje",
             "No logré entender",
+            "Lo siento",
+            "opción que ingresaste no es válida",
+            "te mostré arriba",
             "Menú principal",
             "Para continuar debes seleccionar alguna de las opciones mostradas anteriormente",
             "Lo siento, tu respuesta no es válida");
