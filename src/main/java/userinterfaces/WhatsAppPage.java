@@ -292,7 +292,7 @@ public class WhatsAppPage extends PageObject {
                   .located(By.xpath("//android.widget.ImageButton[@content-desc=\"Atrás\"]"));
 
   public static final Target IMG_CONFIGURA_MODO_RED =
-          Target.the("Boton atras")
+          Target.the("Imagen Configura tu modo de red")
                   .located(By.xpath("(//android.widget.Button[@content-desc=\"Agrandar foto\"])[2]"));
 
   public static final Target BTN_SI_AUTORIZO =
