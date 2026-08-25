@@ -1,5 +1,7 @@
 package tasks.TusEquipos;
 
+import interactions.ClicEnModoRedSeguro;
+import interactions.ClicEnPuntoAccesoSeguro;
 import interactions.Click.ClickElementByText;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.scroll.ScrollInicio;
@@ -68,7 +70,7 @@ public class EstadoServiciosDatos implements Task {
         EvidenciaUtils.registrarCaptura(paso4);
 
         actor.attemptsTo(
-                WaitForTextContains.withTextContains(DATOS,  30),
+                WaitForTextContains.withTextContains(DATOS, 30),
                 Click.on(BTN_DATOS)
         );
         EvidenciaUtils.registrarCaptura(paso5);
@@ -83,7 +85,7 @@ public class EstadoServiciosDatos implements Task {
         actor.attemptsTo(
                 WaitForTextContains.withTextContains(TE_RECOMENDAMOS_SOPORTE, 30)
         );
-       // actor.attemptsTo(ScrollPersonalizado.scroll(872, 522, 872, 1825));
+        // actor.attemptsTo(ScrollPersonalizado.scroll(872, 522, 872, 1825));
         actor.attemptsTo(
                 ScrollInicio.scrollUnaVista(),
                 ValidarTextoQueContengaX.elTextoContiene(TE_RECOMENDAMOS_SOPORTE)
@@ -92,7 +94,7 @@ public class EstadoServiciosDatos implements Task {
 
         actor.attemptsTo(
                 WaitFor.aTime(2000),
-                Click.on(IMG_CONFIGUR_PUNTO_ACCESO)
+                ClicEnPuntoAccesoSeguro.ejecutar()
         );
         EvidenciaUtils.registrarCaptura(paso8);
 
@@ -105,7 +107,7 @@ public class EstadoServiciosDatos implements Task {
 
         actor.attemptsTo(
                 WaitFor.aTime(2000),
-                Click.on(IMG_CONFIGURA_MODO_RED)
+                ClicEnModoRedSeguro.ejecutar()
         );
         EvidenciaUtils.registrarCaptura(paso9);
 
@@ -131,18 +133,7 @@ public class EstadoServiciosDatos implements Task {
         );
         EvidenciaUtils.registrarCaptura(paso12);
 
-        actor.attemptsTo(
-                WaitFor.aTime(2000),
-                Click.on(BTN_NO)
-        );
-        EvidenciaUtils.registrarCaptura(paso13);
 
-        actor.attemptsTo(
-                WaitForTextContains.withTextContains(DESEAS_CONTACTAR_ASESOR, 30),
-                Click.on(BTN_NO2),
-                WaitForTextContains.withTextContains(MENU_PRINCIPAL, 30)
-        );
-        EvidenciaUtils.registrarCaptura(paso14);
     }
 
     public static Performable estadoServiciosDatos() {

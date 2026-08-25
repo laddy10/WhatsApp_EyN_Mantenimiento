@@ -4,12 +4,15 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.*;
 import static utils.Constantes.*;
 
+import interactions.ClicEnModoRedSeguro;
+import interactions.ClicEnPuntoAccesoSeguro;
 import interactions.Click.ClickElementByText;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.scroll.ScrollInicio;
 import interactions.scroll.ScrollPersonalizado;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -66,15 +69,15 @@ public class LineaMiNegocioDatos implements Task {
 
         actor.attemptsTo(
                 Enter.theValue("1").into(TXT_ENVIAR_MENSAJE),
-                Click.on(BTN_ENVIAR)
+                Click.on(BTN_ENVIAR),
+                WaitForTextContains.withAnyTextContains(SE_RESOLVIO_FALLA)
         );
         EvidenciaUtils.registrarCaptura(paso5);
 
         actor.attemptsTo(
-                WaitFor.aTime(20000),
+                WaitFor.aTime(2000),
                 ScrollInicio.scrollUnaVista()
         );
-        //actor.attemptsTo(ScrollPersonalizado.scroll(872, 522, 872, 1825));
 
         actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(
@@ -83,9 +86,10 @@ public class LineaMiNegocioDatos implements Task {
         EvidenciaUtils.registrarCaptura(paso6);
 
         actor.attemptsTo(
-                WaitFor.aTime(2000),
-                Click.on(IMG_CONFIGUR_PUNTO_ACCESO)
+                WaitFor.aTime(5000),
+                ClicEnPuntoAccesoSeguro.ejecutar()
         );
+
         EvidenciaUtils.registrarCaptura(paso7);
 
         actor.attemptsTo(
@@ -93,11 +97,10 @@ public class LineaMiNegocioDatos implements Task {
                 Click.on(BOTON_ATRAS)
         );
 
-        actor.attemptsTo(WaitFor.aTime(2000));
         actor.attemptsTo(ScrollPersonalizado.scroll(850, 1932, 850, 465));
         actor.attemptsTo(
                 WaitFor.aTime(2000),
-                Click.on(IMG_CONFIGURA_MODO_RED)
+                ClicEnModoRedSeguro.ejecutar()
         );
 
         EvidenciaUtils.registrarCaptura(paso8);
