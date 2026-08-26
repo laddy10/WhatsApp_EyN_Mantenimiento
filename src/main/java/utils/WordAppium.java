@@ -27,6 +27,12 @@ public class WordAppium {
   private static final String REPORTES_DIR =
           System.getProperty("user.dir") + File.separator + "reportes";
 
+  // Captura del momento del fallo: la deja ErrorScreenshotHooks (@After order 10), que
+  // corre ANTES que el informe (@After order 1) porque los @After van en orden
+  // descendente. Si alguien cambia esos números, el informe se queda sin la imagen.
+  private static final String ERROR_DIR = "Error";
+  private static final String ERROR_FILE = "error.png";
+
   private static final DateTimeFormatter FORMATTER =
           DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
@@ -54,15 +60,22 @@ public class WordAppium {
           String duracionFormato,
           String pasoFallido,
           String estadoFinal,
-          String tag) {
+          String tag,
+          String motivoFallo) {
+
+    boolean fallo = "FAILED".equalsIgnoreCase(estadoFinal);
 
     File carpetaCapturas = new File(CAPTURAS_DIR);
     System.out.println("Buscando capturas en: " + carpetaCapturas.getAbsolutePath());
 
-    File[] capturas = carpetaCapturas.listFiles();
-    System.out.println("Capturas encontradas: " + (capturas == null ? "0" : capturas.length));
+    File[] listado = carpetaCapturas.listFiles();
+    File[] capturas = listado == null ? new File[0] : listado;
+    System.out.println("Capturas encontradas: " + capturas.length);
 
-    if (capturas == null || capturas.length == 0) {
+    // Sin capturas y sin fallo no hay nada que documentar. Pero si FALLÓ, el informe se
+    // genera igual: antes se salía por aquí y una prueba que se caía antes de la primera
+    // captura no dejaba ningún documento — justo el caso en el que hace falta.
+    if (capturas.length == 0 && !fallo) {
       LOGGER.warning("No hay capturas para procesar.");
       return;
     }
@@ -92,9 +105,10 @@ public class WordAppium {
       reemplazarTexto(doc, "{{DURACION}}", duracionFormato);
       reemplazarTexto(doc, "{{FEATURE}}", tag);
 
-      reemplazarConclusion(doc, pasosEjecutados, pasoFallido, estadoFinal);
+      reemplazarConclusion(doc, pasosEjecutados, pasoFallido, estadoFinal, motivoFallo);
 
       agregarPasosYCapturas(doc, pasosEjecutados, capturas);
+      agregarResultado(doc, estadoFinal, pasoFallido, motivoFallo);
 
       doc.write(fos);
       LOGGER.info("Reporte generado correctamente: " + rutaDestino);
@@ -110,7 +124,8 @@ public class WordAppium {
           XWPFDocument doc,
           String[] pasosEjecutados,
           String pasoFallido,
-          String estadoFinal) {
+          String estadoFinal,
+          String motivoFallo) {
 
     String estadoTexto = "FAILED".equalsIgnoreCase(estadoFinal) ? "FALLIDO" : "EXITOSO";
 
@@ -145,7 +160,8 @@ public class WordAppium {
           runResultado.setFontSize(10);
           if ("FAILED".equalsIgnoreCase(estadoFinal)) {
             runResultado.setText(
-                    "Resultado: La prueba finalizo con errores. Revisar los pasos fallidos.");
+                    "Resultado: La prueba finalizo con errores. Revisar los pasos fallidos."
+                            + motivoParaConclusion(motivoFallo));
           } else {
             runResultado.setText(
                     "Resultado: La prueba finalizo satisfactoriamente. "
@@ -190,7 +206,8 @@ public class WordAppium {
                 runResultado.setFontSize(10);
                 if ("FAILED".equalsIgnoreCase(estadoFinal)) {
                   runResultado.setText(
-                          "Resultado: La prueba finalizo con errores. Revisar los pasos fallidos.");
+                          "Resultado: La prueba finalizo con errores. Revisar los pasos fallidos."
+                                  + motivoParaConclusion(motivoFallo));
                 } else {
                   runResultado.setText(
                           "Resultado: La prueba finalizo satisfactoriamente. "
@@ -202,6 +219,79 @@ public class WordAppium {
           }
         }
       }
+    }
+  }
+
+  /** " Motivo: X" para pegar al final de la conclusion; vacio si no se pudo averiguar. */
+  private static String motivoParaConclusion(String motivoFallo) {
+    return (motivoFallo == null || motivoFallo.trim().isEmpty())
+            ? ""
+            : " Motivo: " + motivoFallo.trim();
+  }
+
+  /**
+   * Cierra el informe con el resultado. Si la prueba falló documenta en qué paso, por qué (mensaje
+   * corto, sin la traza de código) y la captura de la pantalla en ese momento — que es lo que
+   * antes había que ir a buscar al reporte de Serenity.
+   */
+  private static void agregarResultado(
+          XWPFDocument doc, String estadoFinal, String pasoFallido, String motivoFallo)
+          throws IOException, InvalidFormatException {
+    boolean fallo = "FAILED".equalsIgnoreCase(estadoFinal);
+
+    XWPFParagraph titulo = doc.createParagraph();
+    titulo.setSpacingBefore(400);
+    XWPFRun tituloRun = titulo.createRun();
+    tituloRun.setBold(true);
+    tituloRun.setFontSize(14);
+    tituloRun.setColor(fallo ? "C00000" : "2E7D32");
+    tituloRun.setText(fallo ? "RESULTADO: FALLIDO" : "RESULTADO: EXITOSO");
+
+    if (!fallo) {
+      return;
+    }
+
+    if (pasoFallido != null && !pasoFallido.trim().isEmpty()) {
+      agregarParrafo(doc, "Paso donde falló: " + pasoFallido, true);
+    }
+
+    String motivo =
+            (motivoFallo == null || motivoFallo.trim().isEmpty())
+                    ? "No se pudo determinar automáticamente (ver el reporte de Serenity)."
+                    : motivoFallo;
+    agregarParrafo(doc, "Motivo del fallo: " + motivo, true);
+
+    File captura = new File(ERROR_DIR, ERROR_FILE);
+    if (captura.isFile()) {
+      agregarParrafo(doc, "Pantalla en el momento del fallo:", true);
+      try (FileInputStream is = new FileInputStream(captura)) {
+        XWPFRun imgRun = doc.createParagraph().createRun();
+        imgRun.addPicture(
+                is, Document.PICTURE_TYPE_PNG, captura.getName(), Units.toEMU(150), Units.toEMU(270));
+      }
+    } else {
+      agregarParrafo(doc, "(No se pudo capturar la pantalla del fallo)", false);
+    }
+  }
+
+  private static void agregarParrafo(XWPFDocument doc, String texto, boolean etiquetaEnNegrita) {
+    XWPFParagraph p = doc.createParagraph();
+    p.setSpacingBefore(120);
+    int corte = etiquetaEnNegrita ? texto.indexOf(':') : -1;
+
+    if (corte > 0) {
+      XWPFRun etiqueta = p.createRun();
+      etiqueta.setBold(true);
+      etiqueta.setFontSize(12);
+      etiqueta.setText(texto.substring(0, corte + 1) + " ");
+
+      XWPFRun valor = p.createRun();
+      valor.setFontSize(12);
+      valor.setText(texto.substring(corte + 1).trim());
+    } else {
+      XWPFRun run = p.createRun();
+      run.setFontSize(12);
+      run.setText(texto);
     }
   }
 

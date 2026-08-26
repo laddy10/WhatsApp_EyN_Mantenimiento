@@ -11,21 +11,36 @@ import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.targets.Target;
+import utils.ContextoST;
 
 public class SeleccionarNumero implements Task {
 
+  /** El valor tal como está en real-user.json: los últimos 4 dígitos o el número completo. */
+  private final String numeroConfigurado;
+
   private final String ultimos4Digitos;
 
-  public SeleccionarNumero(String ultimos4Digitos) {
-    this.ultimos4Digitos = ultimos4Digitos;
+  public SeleccionarNumero(String numeroConfigurado) {
+    this.numeroConfigurado = numeroConfigurado;
+    // El bot de Claro enmascara los números en el menú (**** 9612), así que la
+    // selección siempre se hace por los últimos 4 dígitos. Al normalizar aquí,
+    // real-user.json puede guardar el número COMPLETO (que es lo que se quiere ver
+    // en las alertas) sin romper la selección, y los valores viejos de 4 dígitos
+    // siguen funcionando igual.
+    this.ultimos4Digitos = ContextoST.ultimos4De(numeroConfigurado);
   }
 
-  public static SeleccionarNumero porUltimos4(String ultimos4Digitos) {
-    return new SeleccionarNumero(ultimos4Digitos);
+  public static SeleccionarNumero porUltimos4(String numeroConfigurado) {
+    return new SeleccionarNumero(numeroConfigurado);
   }
 
   @Override
   public <T extends Actor> void performAs(T actor) {
+
+    // Contrato st-context: qué línea PIDE el escenario. Se registra antes de tocar el
+    // menú para que un fallo aquí (el bot no responde, la línea no está en el menú)
+    // igual informe con qué línea se iba a probar.
+    ContextoST.registrarLinea(numeroConfigurado, "menu");
 
     actor.attemptsTo(WaitFor.aTime(1000));
 
@@ -41,6 +56,10 @@ public class SeleccionarNumero implements Task {
       throw new IllegalArgumentException(
           "No se encontró una línea con los últimos 4 dígitos: " + ultimos4Digitos);
     }
+
+    // La línea estaba en el menú del bot y es la opción que se va a enviar: dato
+    // confirmado en pantalla, no una suposición.
+    ContextoST.confirmarSeleccion(numeroConfigurado, opcionSeleccionada);
 
     // Ingresar la opción en el campo de texto
     actor.attemptsTo(
