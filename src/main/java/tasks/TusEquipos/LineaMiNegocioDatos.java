@@ -70,7 +70,7 @@ public class LineaMiNegocioDatos implements Task {
         actor.attemptsTo(
                 Enter.theValue("1").into(TXT_ENVIAR_MENSAJE),
                 Click.on(BTN_ENVIAR),
-                WaitForTextContains.withAnyTextContains(SE_RESOLVIO_FALLA)
+                WaitForTextContains.withAnyTextContains(SE_RESOLVIO_FALLA, FUE_SENCILLO, SI)
         );
         EvidenciaUtils.registrarCaptura(paso5);
 

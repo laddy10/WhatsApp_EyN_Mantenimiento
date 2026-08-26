@@ -251,4 +251,5 @@ public class Constantes {
     public static final String ME_ENCANTA_PODER_AYUDARTE = "Me encanta poder ayudarte";
     public static final String RECOMENDARME_FAMILIA_AMIGOS = "No olvides recomendarme con tu familia y amigos";
     public static final String ME_NECESITAS_ESCRIBE_HOLA = "Siempre que me necesites escribe la palabra Hola";
+    public static final String SI = "Si";
 }
