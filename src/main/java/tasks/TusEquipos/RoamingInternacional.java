@@ -1,6 +1,8 @@
 package tasks.TusEquipos;
 
 import interactions.Click.ClickElementByText;
+import interactions.Click.ClickPrimerTextoDisponible;
+import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
@@ -25,14 +27,14 @@ import utils.EvidenciaUtils;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.*;
-        import static userinterfaces.WhatsAppPage.BTN_ENVIAR_MENU;
+import static userinterfaces.WhatsAppPage.BTN_ENVIAR_MENU;
 import static utils.Constantes.*;
 
 public class RoamingInternacional implements Task {
 
     private static final String paso1 = "Click en Menú principal";
     private static final String paso2 = "Seleccionar la opcion Roaming internacional";
-    private static final String paso3 = "Validar que existan las opciones de Gestionar Roaming y Soporte Roaming";
+    private static final String paso3 = "Validar direccionamiento Mi Claro";
 
     @Override
     public <T extends Actor> void performAs(T actor) {
@@ -53,9 +55,13 @@ public class RoamingInternacional implements Task {
         EvidenciaUtils.registrarCaptura(paso2);
 
         actor.attemptsTo(
-                WaitForTextContains.withTextContains(GESTIONAR_ROAMING, 15),
-                WaitForTextContains.withAnyTextContains(SOPORTE_ROAMING),
-                WaitFor.aTime(2000)
+                WaitForTextContains.withAnyTextContains(GESTIONAR_ROAMING, COMPRAR_ROAMING_2),
+                ClickPrimerTextoDisponible.entre(GESTIONAR_ROAMING, COMPRAR_ROAMING_2),
+                WaitForTextContains.withAnyTextContains(MUNDO_CLARO),
+                WaitFor.aTime(4000),
+                ValidarTextoQueContengaX.elTextoContiene(MUNDO_CLARO),
+                ValidarTextoQueContengaX.elTextoContiene(TIENDA)
+
         );
 
         EvidenciaUtils.registrarCaptura(paso3);

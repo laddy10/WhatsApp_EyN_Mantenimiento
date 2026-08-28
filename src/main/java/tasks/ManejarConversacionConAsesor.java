@@ -58,6 +58,9 @@ public class ManejarConversacionConAsesor implements Task {
                     "canal de atención de Claro",
                     "Mi nombre",
                     "nombre y número de documento",
+                    "nombre y documento",
+                    "en qué puedo ayudarte",
+                    "Sigo atenta para ayudarte",
                     "Espero que estés muy bien",
                     "En que puedo ayudarlo",
                     "mi compañero se comunicara",
@@ -116,7 +119,12 @@ public class ManejarConversacionConAsesor implements Task {
                     "finalizo",
                     "fue un gusto",
                     "Fue un gusto",
-                    "cerrar el caso"
+                    "cerrar el caso",
+                    "cerrado el chat",
+                    "caso quedó atendido",
+                    "excelente día",
+                    "feliz día",
+                    "encuesta de satisfacción"
                 ).answeredBy(actor);
             }
 
@@ -142,6 +150,9 @@ public class ManejarConversacionConAsesor implements Task {
         return TextoQueContengaX.verificarTexto("canal de atención de Claro").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Mi nombre").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("nombre y número de documento").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("nombre y documento").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("en qué puedo ayudarte").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Sigo atenta para ayudarte").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Espero que estés muy bien").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("En que puedo ayudarlo").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("mi compañero se comunicara").answeredBy(actor)
@@ -155,7 +166,12 @@ public class ManejarConversacionConAsesor implements Task {
                 || TextoQueContengaX.verificarTexto("finalizo").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("fue un gusto").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Fue un gusto").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("cerrar el caso").answeredBy(actor);
+                || TextoQueContengaX.verificarTexto("cerrar el caso").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("cerrado el chat").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("caso quedó atendido").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("excelente día").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("feliz día").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("encuesta de satisfacción").answeredBy(actor);
     }
 
     private boolean mensajeFinalizacionYaEnviado(Actor actor) {

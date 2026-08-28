@@ -7,6 +7,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y seleccionar soporte tecnico en opciones rapidas
@@ -18,6 +19,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y seleccionar soporte tecnico en opciones rapidas
@@ -29,6 +31,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y seleccionar soporte tecnico en opciones rapidas
@@ -40,6 +43,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y seleccionar soporte tecnico en opciones rapidas
@@ -51,6 +55,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger detalles de tu plan
@@ -61,6 +66,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger consulta tu consumo
@@ -71,6 +77,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger validar tu factura y validar consulta de consumo
@@ -81,6 +88,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger estado de servicios Datos
@@ -91,6 +99,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger soporte y servicio/ PQR
@@ -101,6 +110,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger todo sobre tu plan/ Conoce tu plan
@@ -111,6 +121,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger todo sobre tu plan/ Conoce tu consumo
@@ -121,6 +132,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger Todo sobre tu plan/ Modifica tu plan
@@ -131,6 +143,7 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger Todo sobre tu plan/ Cancelar plan
@@ -141,16 +154,18 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger Roaming internacional
-    Y Vaciar chat
+
 
   @WH_EyN_Compra_WhatsApp
   Escenario: Compra por WhatsApp
     Dado que el usuario ingresa a WhatsAPP
     Cuando valida version de la App
     Y buscar el chat de Claro Colombia
+    Y Cerrar caso abierto si existe
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger Roaming internacional

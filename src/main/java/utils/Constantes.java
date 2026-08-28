@@ -44,6 +44,7 @@ public class Constantes {
     public static final String PLAN_CONSUMOS = "Todo lo que necesitas saber de tu plan y tus consumos.";
     public static final String SELECCIONA = "Selecciona";
     public static final String GESTIONAR_ROAMING = "Gestionar Roaming";
+    public static final String COMPRAR_ROAMING_2 = "Comprar roaming";
     public static final String CONSULTA_TUS_CONSUMOS = "Consulta tus consumos";
     public static final String SIN_SALDO_DISPONIBLE = "Actualmente no tienes saldo disponible.";
     public static final String COMPRAR_PAQUETE = "Comprar paquete";
@@ -252,4 +253,7 @@ public class Constantes {
     public static final String RECOMENDARME_FAMILIA_AMIGOS = "No olvides recomendarme con tu familia y amigos";
     public static final String ME_NECESITAS_ESCRIBE_HOLA = "Siempre que me necesites escribe la palabra Hola";
     public static final String SI = "Si";
+    public static final String FINALIZAR_CHAT = "Finalizar chat";
+    public static final String MUNDO_CLARO = "Mundo Claro";
+    public static final String TIENDA = "Tienda";
 }

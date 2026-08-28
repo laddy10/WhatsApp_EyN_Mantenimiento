@@ -62,6 +62,11 @@ public class WhatsappDefinitions {
     theActorInTheSpotlight().attemptsTo(BuscarChatClaro.buscarChatClaro());
   }
 
+  @And("^Cerrar caso abierto si existe$")
+  public void cerrarCasoAbierto() {
+    theActorInTheSpotlight().attemptsTo(CerrarCasoAbiertoSiExiste.ejecutar());
+  }
+
   @And("^se inicia el chat con Claro Colombia$")
   public void iniciarChatClaro() {
     theActorInTheSpotlight().attemptsTo(IniciarChatClaro.iniciarChatClaro());
