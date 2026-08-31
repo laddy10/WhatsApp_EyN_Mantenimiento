@@ -169,5 +169,3 @@ Característica: Validar los flujos de WhatsApp empresas y negocios
     Y se inicia el chat con Claro Colombia
     Y validar politica de tratamientos de datos
     Y escoger Roaming internacional
-    Y Vaciar chat
-

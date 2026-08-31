@@ -2,6 +2,7 @@ package tasks.TusEquipos;
 
 import interactions.Click.ClickElementByText;
 import interactions.Click.ClickPrimerTextoDisponible;
+import interactions.Click.ManejarSelectorDeApp;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForTextContains;
@@ -57,6 +58,7 @@ public class RoamingInternacional implements Task {
         actor.attemptsTo(
                 WaitForTextContains.withAnyTextContains(GESTIONAR_ROAMING, COMPRAR_ROAMING_2),
                 ClickPrimerTextoDisponible.entre(GESTIONAR_ROAMING, COMPRAR_ROAMING_2),
+                ManejarSelectorDeApp.siAparece(),
                 WaitForTextContains.withAnyTextContains(MUNDO_CLARO),
                 WaitFor.aTime(4000),
                 ValidarTextoQueContengaX.elTextoContiene(MUNDO_CLARO),

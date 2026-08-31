@@ -12,7 +12,7 @@ import utils.DataToFeature;
         features = "src/test/resources/features",
         glue = {"stepDefinitions", "utils", "hooks"},
         snippets = SnippetType.CAMELCASE,
-        tags = "@WH_EyN_Opciones_Rapidas_Soporte_Llamadas"
+        tags = "@WH_EyN_Roaming_Internacional"
 
 )
 
