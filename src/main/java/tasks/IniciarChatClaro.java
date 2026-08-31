@@ -46,7 +46,7 @@ public class IniciarChatClaro implements Task {
 
             // 2️⃣ Esperar respuesta del bot (Se mantienen los textos actuales)
             boolean respondioBot = WaitForTextContainsWithTimeout.esperar(
-                    30,
+                    50,
                     "Claro Empresas y Negocios",
                     "Estoy aquí para ayudarte",
                     "¿Autorizas y aceptas?",
@@ -64,7 +64,7 @@ public class IniciarChatClaro implements Task {
 
             if (!respondioBot) {
                 EstadoAtencionHumana.marcarEnCola();
-                ReportHooks.registrarPaso("Silencio del bot (30s); posible espera de asesor.");
+                ReportHooks.registrarPaso("Silencio del bot (50s); posible espera de asesor.");
                 actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
                 continue;
             }

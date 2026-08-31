@@ -10,7 +10,13 @@ import questions.TextoQueContengaX;
 import utils.CapturaDePantallaMovil;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppPage.BTN_MAS_OPCIONES;
+import static userinterfaces.WhatsAppPage.BTN_VACIAR_CHAT;
 import static utils.Constantes.FINALIZAR_CHAT;
+import static utils.Constantes.MAS;
+import static utils.Constantes.VACIAR_CHAT;
+import utils.EstadoAtencionHumana;
+import net.serenitybdd.screenplay.actions.Click;
 
 /**
  * Saneo previo: cierra un CASO ABIERTO que quedo a medias de una ejecucion
@@ -51,7 +57,8 @@ public class CerrarCasoAbiertoSiExiste implements Task {
         // 3) Confirmar que el bot cerro el caso (responde pidiendo "Hola" de nuevo)
         boolean cierreConfirmado = WaitForTextContainsWithTimeout.esperar(
                 TIMEOUT_CONFIRMACION_CIERRE,
-                "escribe la palabra Hola", "escribe la palabra hola",
+                "escribe la palabra Hola",
+                "escribe la palabra hola",
                 "Me encanta poder ayudarte",
                 "Tus comentarios son muy importantes",
                 "calificarme"
@@ -60,6 +67,18 @@ public class CerrarCasoAbiertoSiExiste implements Task {
         if (cierreConfirmado) {
             ReportHooks.registrarPaso("Caso anterior cerrado correctamente; chat listo para iniciar");
             CapturaDePantallaMovil.tomarCapturaPantalla("Caso anterior cerrado - chat limpio");
+            
+            // Vaciar chat para limpiar todo el historial visual de la conversación anterior
+            ReportHooks.registrarPaso("Procediendo a vaciar el chat físicamente para evitar historial sucio");
+            actor.attemptsTo(
+                    WaitFor.aTime(2000),
+                    Click.on(BTN_MAS_OPCIONES),
+                    ClickTextoQueContengaX.elTextoContiene(MAS),
+                    ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT),
+                    Click.on(BTN_VACIAR_CHAT),
+                    WaitFor.aTime(2500)
+            );
+            ReportHooks.registrarPaso("Historial de chat vaciado correctamente.");
         } else {
             ReportHooks.registrarPaso(
                     "Se pulso 'Finalizar chat' pero no se detecto el mensaje de cierre; "
