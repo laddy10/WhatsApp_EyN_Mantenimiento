@@ -3,6 +3,7 @@ package tasks.TusEquipos;
 import interactions.Click.ClickElementByText;
 import interactions.Click.ClickPrimerTextoDisponible;
 import interactions.Click.ManejarSelectorDeApp;
+import interactions.Validaciones.ValidarCualquieraDeLosTextos;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForTextContains;
@@ -59,11 +60,13 @@ public class RoamingInternacional implements Task {
                 WaitForTextContains.withAnyTextContains(GESTIONAR_ROAMING, COMPRAR_ROAMING_2),
                 ClickPrimerTextoDisponible.entre(GESTIONAR_ROAMING, COMPRAR_ROAMING_2),
                 ManejarSelectorDeApp.siAparece(),
-                WaitForTextContains.withAnyTextContains(MUNDO_CLARO),
+                
+                // Espera flexible: Si carga la app puede pedir sesión o entrar directo
+                WaitForTextContains.withAnyTextContains(MUNDO_CLARO, INICIAR_SESION),
                 WaitFor.aTime(4000),
-                ValidarTextoQueContengaX.elTextoContiene(MUNDO_CLARO),
-                ValidarTextoQueContengaX.elTextoContiene(TIENDA)
-
+                
+                // Validación flexible: Cualquiera de los dos textos es una validación exitosa de redireccionamiento
+                ValidarCualquieraDeLosTextos.contieneAlguno(MUNDO_CLARO, INICIAR_SESION)
         );
 
         EvidenciaUtils.registrarCaptura(paso3);

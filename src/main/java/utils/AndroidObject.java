@@ -17,6 +17,27 @@ import static utils.Constantes.VALIDACIONES_PIN;
 
 public class AndroidObject {
 
+  @FunctionalInterface
+  public interface AccionAppium<T> {
+      T ejecutar() throws Exception;
+  }
+
+  protected <T> T ejecutarConReintentoSilencioso(AccionAppium<T> accion) {
+      int maxIntentos = 3;
+      for (int i = 1; i <= maxIntentos; i++) {
+          try {
+              return accion.ejecutar();
+          } catch (org.openqa.selenium.StaleElementReferenceException | NullPointerException e) {
+              if (i == maxIntentos) throw new RuntimeException("Error persistente tras " + maxIntentos + " intentos: " + e.getMessage(), e);
+              try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+          } catch (Exception e) {
+              throw new RuntimeException(e);
+          }
+      }
+      return null;
+  }
+
+
   public void HideKeyboard(Actor actor) {
     androidDriver(actor).hideKeyboard();
   }
@@ -68,52 +89,66 @@ public class AndroidObject {
   // VALIDACIONES
   public boolean validarTexto(Actor actor, String text) {
     try {
-      return androidDriver(actor)
-          .findElementByAndroidUIAutomator("new UiSelector().text(\"" + text + "\")")
-          .isDisplayed();
-    } catch (NoSuchElementException e) {
+      return ejecutarConReintentoSilencioso(() -> 
+          androidDriver(actor)
+              .findElementByAndroidUIAutomator("new UiSelector().text(\"" + text + "\")")
+              .isDisplayed()
+      );
+    } catch (Exception e) {
       System.out.println("Texto no encontrado: " + text);
       return false;
     }
   }
 
   public void ElTextoContiene(Actor actor, String text) {
-    androidDriver(actor)
-        .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + text + "\")")
-        .isDisplayed();
+    ejecutarConReintentoSilencioso(() -> {
+        androidDriver(actor)
+            .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + text + "\")")
+            .isDisplayed();
+        return true;
+    });
   }
 
   public boolean textoContiene(Actor actor, String text) {
     String safe = text.replace("\\", "\\\\").replace("\"", "\\\"");
     try {
-      // por texto
-      if (androidDriver(actor)
-          .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + safe + "\")")
-          .isDisplayed()) return true;
+      return ejecutarConReintentoSilencioso(() -> {
+        // por texto
+        if (androidDriver(actor)
+            .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + safe + "\")")
+            .isDisplayed()) return true;
 
-      // por content-desc (por si el bot lo pone en description)
-      if (androidDriver(actor)
-          .findElementByAndroidUIAutomator("new UiSelector().descriptionContains(\"" + safe + "\")")
-          .isDisplayed()) return true;
+        // por content-desc (por si el bot lo pone en description)
+        if (androidDriver(actor)
+            .findElementByAndroidUIAutomator("new UiSelector().descriptionContains(\"" + safe + "\")")
+            .isDisplayed()) return true;
 
-      return false;
-    } catch (NoSuchElementException e) {
+        return false;
+      });
+    } catch (Exception e) {
       return false;
     }
   }
 
   // CLICK
   public void ClickByText(Actor actor, String text) {
-    actor.attemptsTo(WaitFor.aTime(1000));
-    androidDriver(actor)
-        .findElementByAndroidUIAutomator("new UiSelector().text(\"" + text + "\")")
-        .click();
+    actor.attemptsTo(WaitFor.aTime(4000));
+    ejecutarConReintentoSilencioso(() -> {
+        androidDriver(actor)
+            .findElementByAndroidUIAutomator("new UiSelector().text(\"" + text + "\")")
+            .click();
+        return true;
+    });
   }
 
   public void ClickElTextoContiene(Actor actor, String text) {
-    androidDriver(actor)
-        .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + text + "\")")
-        .click();
+    actor.attemptsTo(WaitFor.aTime(4000));
+    ejecutarConReintentoSilencioso(() -> {
+        androidDriver(actor)
+            .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + text + "\")")
+            .click();
+        return true;
+    });
   }
 
   String texto = "";

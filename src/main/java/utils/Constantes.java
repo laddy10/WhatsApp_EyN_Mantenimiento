@@ -255,5 +255,6 @@ public class Constantes {
     public static final String SI = "Si";
     public static final String FINALIZAR_CHAT = "Finalizar chat";
     public static final String MUNDO_CLARO = "Mundo Claro";
+    public static final String INICIAR_SESION = "Iniciar sesión";
     public static final String TIENDA = "Tienda";
 }

@@ -1,5 +1,6 @@
 package utils;
 
+import io.appium.java_client.Setting;
 import io.appium.java_client.android.AndroidDriver;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -37,6 +38,11 @@ public class MyDriver implements DriverSource {
 
       URL hub = new URL("http://127.0.0.1:4723/wd/hub");
       driver = new AndroidDriver(hub, caps);
+
+      // Evita "Timed out waiting for the root AccessibilityNodeInfo":
+      // vuelca el árbol sin esperar a que la app quede totalmente idle.
+      driver.setSetting(Setting.WAIT_FOR_IDLE_TIMEOUT, 100);
+
       driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
       return driver;
 
