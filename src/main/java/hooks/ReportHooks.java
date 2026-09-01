@@ -72,8 +72,10 @@ public class ReportHooks {
     EstadoPrueba.pasoFallido = pasoFallido;
     String motivoFallo = fallo ? CausaFallo.descripcionCorta() : "";
 
-    // La línea sale del registro que se llena donde se elige, no del estático lineaUsada.
-    String identificacion = ContextoST.identificacionUsada();
+    // Las dos líneas, que son cosas distintas: la que el escenario consultó en el menú
+    // del bot y la del chip desde el que se está chateando (fija por celular, la manda
+    // el orquestador desde devices.json).
+    String identificacion = ContextoST.lineaParaInforme();
 
     // ✅ Obtener el tag del escenario (ej: @WH_E&N_Soporte_Datos)
     String tag = "Sin tag";

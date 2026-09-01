@@ -143,6 +143,7 @@ public class ContextoST {
       // {{cuentaPrueba}} en las plantillas). Si el escenario cambio de linea a mitad
       // de camino van todas, en orden.
       datos.put("linea", lineaResumen());
+      datos.put("lineaCuenta", lineaCuentaWhatsApp());
       datos.put("cuenta", cuenta);
       datos.put("selecciones", new ArrayList<>(SELECCIONES));
       datos.put("resultado", scenario != null && scenario.isFailed() ? "FAILED" : "PASSED");
@@ -157,6 +158,36 @@ public class ContextoST {
     } catch (Exception e) {
       System.err.println("[ContextoST] No se pudo registrar el contexto del escenario: " + e);
     }
+  }
+
+  /**
+   * Linea de la cuenta de WhatsApp desde la que se prueba: el chip del celular que esta
+   * chateando con Claro. NO es la linea que el escenario consulta en el menu del bot — son
+   * dos cosas distintas y la prueba nunca menciona esta, porque no le hace falta.
+   *
+   * <p>Es fija por celular, asi que la inyecta el orquestador como {@code -Dwhatsapp.linea}
+   * a partir del campo {@code whatsapp_linea} de devices.json. Cadena vacia si ese celular
+   * todavia no la tiene configurada.
+   */
+  public static String lineaCuentaWhatsApp() {
+    String linea = System.getProperty("whatsapp.linea", "");
+    return linea == null ? "" : linea.trim();
+  }
+
+  /**
+   * Lo que va en el campo "LINEA Y PLAN" del informe Word: las dos lineas, etiquetadas, para
+   * que no se confundan. Si falta alguna, sale solo la que hay.
+   */
+  public static synchronized String lineaParaInforme() {
+    String consultada = identificacionUsada();
+    String cuenta = lineaCuentaWhatsApp();
+    if (cuenta.isEmpty()) {
+      return consultada;
+    }
+    if (consultada.isEmpty()) {
+      return "Cuenta WhatsApp: " + cuenta;
+    }
+    return "Consultada: " + consultada + " | Cuenta WhatsApp: " + cuenta;
   }
 
   /**
