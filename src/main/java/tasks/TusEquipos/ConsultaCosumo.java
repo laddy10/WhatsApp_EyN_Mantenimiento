@@ -7,6 +7,7 @@ import interactions.Click.ClickElementByText;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -41,8 +42,9 @@ public class ConsultaCosumo implements Task {
         EvidenciaUtils.registrarCaptura(paso3);
 
         actor.attemptsTo(
-                WaitForResponse.withText(DESCRIPCION_CONSUMO),
-                WaitForResponse.withText(MENU_PRINCIPAL)
+                WaitForTextContains.withAnyTextContains(
+                        DESCRIPCION_CONSUMO,
+                        SIN_CONSUMO_DATOS)
 
         );
 

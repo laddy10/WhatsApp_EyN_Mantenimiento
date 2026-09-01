@@ -1,9 +1,7 @@
 package tasks.TusEquipos;
 
 import interactions.Click.ClickElementByText;
-import interactions.comunes.Atras;
 import interactions.wait.WaitFor;
-import interactions.wait.WaitForElement;
 import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -14,9 +12,6 @@ import utils.EvidenciaUtils;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.*;
 import static userinterfaces.WhatsAppPage.BTN_ENVIAR_MENU;
-import static userinterfaces.WhatsAppPage.BTN_TUS_PQR_RADICADOS;
-import static userinterfaces.WhatsAppPage.BTN_TUS_PQR_RADICADOS_DESCRIPCION;
-import static userinterfaces.WhatsAppPage.BTN_VER_PQR;
 import static utils.Constantes.*;
 
 public class TodoSobrePlanConoceConsumo implements Task {
@@ -56,8 +51,9 @@ public class TodoSobrePlanConoceConsumo implements Task {
         EvidenciaUtils.registrarCaptura(paso3);
 
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(CONSUMO_DATOS_A_LA_FECHA),
-                WaitForTextContains.withAnyTextContains(MENU_PRINCIPAL)
+                WaitForTextContains.withAnyTextContains(
+                        CONSUMO_DATOS_A_LA_FECHA,
+                        SIN_CONSUMO_DATOS)
         );
 
         EvidenciaUtils.registrarCaptura(paso4);

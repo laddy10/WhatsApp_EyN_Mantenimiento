@@ -248,6 +248,7 @@ public class Constantes {
     public static final String NUMERO_NECESITES = "Escribe el número que necesitas";
     public static final String DESCRIPCION_PLAN = "A continuación describimos lo que tienes disponible en tu plan:";
     public static final String DESCRIPCION_CONSUMO = "Estos son tus consumos de datos a la fecha:";
+    public static final String SIN_CONSUMO_DATOS = "Actualmente no has consumido datos de tu plan postpago";
     public static final String TE_RECOMENDAMOS_SOPORTE = "Te recomendamos seguir este soporte con el paso a paso";
     public static final String ME_ENCANTA_PODER_AYUDARTE = "Me encanta poder ayudarte";
     public static final String RECOMENDARME_FAMILIA_AMIGOS = "No olvides recomendarme con tu familia y amigos";
