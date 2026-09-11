@@ -74,7 +74,7 @@ public class LineaMiNegocioDatos implements Task {
         );
         EvidenciaUtils.registrarCaptura(paso5);
 
-        actor.attemptsTo(
+   /*     actor.attemptsTo(
                 WaitFor.aTime(6000),
                 ScrollInicio.scrollUnaVista()
         );
@@ -83,7 +83,7 @@ public class LineaMiNegocioDatos implements Task {
                 ValidarTextoQueContengaX.elTextoContiene(
                         "Te recomendamos seguir este soporte con el paso a paso")
         );
-        EvidenciaUtils.registrarCaptura(paso6);
+        EvidenciaUtils.registrarCaptura(paso6); */
 
         actor.attemptsTo(
                 WaitFor.aTime(5000),

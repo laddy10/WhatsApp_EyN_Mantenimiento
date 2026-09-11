@@ -35,8 +35,12 @@ public class IniciarChatClaro implements Task {
             actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
         }
 
+        actor.attemptsTo(
+                ValidarTextoErrorYLimpiarChat.validarYLimpiar()
+        );
+
         for (int intento = 1; intento <= MAX_INTENTOS; intento++) {
-            
+
             // 1️⃣ Escribir Hola y enviar
             actor.attemptsTo(
                     Enter.theValue("Hola").into(TXT_ENVIAR_MENSAJE),
@@ -47,10 +51,19 @@ public class IniciarChatClaro implements Task {
             // 2️⃣ Esperar respuesta del bot (Se mantienen los textos actuales)
             boolean respondioBot = WaitForTextContainsWithTimeout.esperar(
                     50,
+
+                    // Flujo normal Empresas y Negocios
                     "Claro Empresas y Negocios",
                     "Estoy aquí para ayudarte",
                     "¿Autorizas y aceptas?",
                     "Elige una de las opciones que tenemos para ti",
+
+                    // Escalamiento real a asesor
+                    "Voy a comunicarte con uno de nuestros asesores",
+                    "comunicarte con uno de nuestros asesores",
+                    "te comunicaremos con un asesor",
+
+                    // Errores/residuos que ya maneja el proyecto
                     "No entendí tu mensaje",
                     "no entendí tu mensaje",
                     "elige una de las opciones",
@@ -63,12 +76,16 @@ public class IniciarChatClaro implements Task {
             ).answeredBy(actor);
 
             if (!respondioBot) {
-                EstadoAtencionHumana.marcarEnCola();
-                ReportHooks.registrarPaso("Silencio del bot (50s); posible espera de asesor.");
-                actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
-                continue;
-            }
 
+                ReportHooks.registrarPaso(
+                        "No se presento la respuesta esperada del bot Claro Empresas y Negocios dentro de 50 segundos."
+                );
+
+                throw new IllegalStateException(
+                        "Intermitencia del canal Claro Empresas y Negocios: "
+                                + "no se presento la respuesta esperada del flujo."
+                );
+            }
             // 3️⃣ Obtener y evaluar el estado de la respuesta
             EstadoConversacion estado = ClasificarRespuestaBot.obtenerEstado(actor);
 
@@ -89,7 +106,7 @@ public class IniciarChatClaro implements Task {
 
                 case FLUJO_NORMAL:
                     flujoExitoso = true;
-                    break; 
+                    break;
             }
 
             if (flujoExitoso) {

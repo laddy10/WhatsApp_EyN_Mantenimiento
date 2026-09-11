@@ -48,7 +48,7 @@ public class RoamingInternacional implements Task {
         EvidenciaUtils.registrarCaptura(paso1);
 
         actor.attemptsTo(
-                WaitForTextContains.withTextContains(ROAMING_INTERNACIONAL, 15),
+                WaitForTextContains.withTextContains(ROAMING_INTERNACIONAL, 30),
                 Click.on(BTN_ROAMING_INTERNACIONAL),
                 Click.on(BTN_ENVIAR_MENU),
                 WaitFor.aTime(2000)

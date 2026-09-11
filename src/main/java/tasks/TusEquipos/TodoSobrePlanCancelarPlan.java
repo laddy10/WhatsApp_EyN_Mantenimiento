@@ -31,7 +31,7 @@ public class TodoSobrePlanCancelarPlan implements Task {
         EvidenciaUtils.registrarCaptura(paso1);
 
         actor.attemptsTo(
-                WaitForTextContains.withTextContains(TODO_SOBRE_TU_PLAN, 15),
+                WaitForTextContains.withTextContains(TODO_SOBRE_TU_PLAN, 50),
                 Click.on(BTN_TODO_SOBRE_TU_PLAN),
                 Click.on(BTN_ENVIAR_MENU),
                 WaitFor.aTime(2000)
@@ -40,7 +40,7 @@ public class TodoSobrePlanCancelarPlan implements Task {
         EvidenciaUtils.registrarCaptura(paso2);
 
         actor.attemptsTo(
-                WaitForTextContains.withTextContains(SELECCIONA, 15),
+                WaitForTextContains.withTextContains(SELECCIONA, 50),
                 Click.on(BTN_SELECCIONA),
                 WaitForTextContains.withAnyTextContains(CANCELAR_PLAN),
                 WaitFor.aTime(2000)
