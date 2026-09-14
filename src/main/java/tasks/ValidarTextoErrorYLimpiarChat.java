@@ -5,32 +5,31 @@ import static userinterfaces.WhatsAppPage.*;
 import static utils.Constantes.*;
 
 import interactions.Click.ClickTextoQueContengaX;
+import interactions.wait.WaitForTextContains;
 
 import java.util.Arrays;
 import java.util.List;
 
-import interactions.wait.WaitForTextContains;
-import models.User;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Enter;
 import questions.TextoQueContengaX;
-import utils.TestDataProvider;
 
 public class ValidarTextoErrorYLimpiarChat implements Task {
-
-    private final User user = TestDataProvider.getRealUser();
 
     @Override
     public <T extends Actor> void performAs(T actor) {
 
-        // 1. Validar si quedó pendiente la política de tratamiento de datos
+        // 1. Validar si realmente quedó pendiente la política de tratamiento de datos
         boolean politicaTratamientoVisible =
                 TextoQueContengaX.verificarTexto("¿Autorizas y aceptas?")
                         .answeredBy(actor);
 
-        if (politicaTratamientoVisible) {
+        boolean noAutorizoVisible =
+                TextoQueContengaX.verificarTexto("No autorizo")
+                        .answeredBy(actor);
+
+        if (politicaTratamientoVisible && noAutorizoVisible) {
 
             // Seleccionar "No autorizo"
             actor.attemptsTo(
@@ -57,7 +56,7 @@ public class ValidarTextoErrorYLimpiarChat implements Task {
             return;
         }
 
-        // Aquí continúa el manejo que ya tenías
+        // 2. Manejo de errores y conversaciones residuales conocidas
         List<String> mensajesError =
                 Arrays.asList(
                         "Por favor ingrese el número de opción",
@@ -79,9 +78,15 @@ public class ValidarTextoErrorYLimpiarChat implements Task {
 
         boolean textoErrorDetectado =
                 mensajesError.stream()
-                        .anyMatch(msg -> TextoQueContengaX.verificarTexto(msg).answeredBy(actor));
+                        .anyMatch(
+                                msg ->
+                                        TextoQueContengaX
+                                                .verificarTexto(msg)
+                                                .answeredBy(actor)
+                        );
 
         if (textoErrorDetectado) {
+
             actor.attemptsTo(
                     SalirConversacion.salir(),
                     Click.on(BTN_MAS_OPCIONES),
