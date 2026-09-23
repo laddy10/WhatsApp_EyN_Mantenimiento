@@ -45,12 +45,16 @@ public class ContextoST {
   /** Cuenta elegida cuando el flujo NO va por numero de linea (Hogar: una direccion). */
   private static String cuenta = null;
 
+  /** Segmento del escenario en curso. Ver registrarSegmento. */
+  private static String segmento = null;
+
   private ContextoST() {}
 
   /** Arranque de escenario: olvidar las lineas del anterior (los estaticos sobreviven la corrida). */
   public static synchronized void reiniciar() {
     SELECCIONES.clear();
     cuenta = null;
+    segmento = null;
   }
 
   /**
@@ -59,6 +63,21 @@ public class ContextoST {
    */
   public static synchronized void registrarCuenta(String descripcion) {
     cuenta = descripcion;
+  }
+
+  /**
+   * Que SEGMENTO esta probando este escenario.
+   *
+   * <p>En ESTE proyecto el segmento es siempre el mismo ("E&N") y ademas casi ningun flujo elige
+   * linea en un menu, asi que en la practica no se llama desde ningun lado: el valor sale del
+   * respaldo {@code -Dst.segmento}, que el orquestador inyecta desde projects.json. El metodo
+   * existe igual para que el contrato sea el mismo en todos los proyectos y para el dia en que
+   * aparezca un flujo que si distinga.
+   *
+   * <p>Va a Smart Tester como {@code {{segmentoPrueba}}}.
+   */
+  public static synchronized void registrarSegmento(String valor) {
+    segmento = valor;
   }
 
   /**
@@ -145,6 +164,7 @@ public class ContextoST {
       datos.put("linea", lineaResumen());
       datos.put("lineaCuenta", lineaCuentaWhatsApp());
       datos.put("cuenta", cuenta);
+      datos.put("segmento", segmentoResuelto());
       datos.put("selecciones", new ArrayList<>(SELECCIONES));
       datos.put("resultado", scenario != null && scenario.isFailed() ? "FAILED" : "PASSED");
       datos.put("registradoEn", LocalDateTime.now().toString());
@@ -158,6 +178,18 @@ public class ContextoST {
     } catch (Exception e) {
       System.err.println("[ContextoST] No se pudo registrar el contexto del escenario: " + e);
     }
+  }
+
+  /**
+   * El segmento del escenario, o el valor por defecto del proyecto ({@code -Dst.segmento}, que el
+   * orquestador inyecta desde projects.json) si el escenario no alcanzo a declararlo.
+   */
+  private static synchronized String segmentoResuelto() {
+    if (segmento != null && !segmento.trim().isEmpty()) {
+      return segmento.trim();
+    }
+    String porDefecto = System.getProperty("st.segmento", "");
+    return porDefecto == null ? "" : porDefecto.trim();
   }
 
   /**
